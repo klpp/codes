@@ -1,3 +1,25 @@
+/*
+ * This Java class is the implementation of  GRAS, a graph-based statistical 
+ * stemmer proposed by J. H. Paik et al:
+ * Jiaul H Paik, Mandar Mitra, Swapan K Parui, and Kalervo J¨arvelin. GRAS: An Effective
+ * and Efficient Stemming Algorithm for Information Retrieval. ACM TOIS, 29(4):19, 2011. 
+ *
+ *
+ * The current implemenation has been developed by Kyumars Sheykh Esmaili, 
+ * a member of the Kurdish Language Processing Project (KLPP) team at University of Kurdistan, Sanandaj, Iran.
+ * For more information about KLPP, see: 
+ *      http://eng.uok.ac.ir/esmaili/research/klpp/en/main.htm
+ *
+ *
+ ********************** Citation information ****************************
+ * S. Salavati, K. Sheykh Esmaili and F. Akhlaghian, "Stemming for Kurdish Information Retrieval", 
+ * In the Proceedings of the 9th Asia Information Retrieval Societies Conference (AIRS'13),
+ * Singapore, December 2013.
+ ************************************************************************
+ *
+ * @author Kyumars Sheykh Esmaili
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -9,21 +31,21 @@ import java.util.Scanner;
 public class GRAS {
 
 
-	private static int[] landaValues = {3};
+	private static int[] landaValues = {5,6,7};
 	private static int landa; //the minimum length of "word - suffix"; 
 	//in the paper it says that the average word length of the language is a good guess;
 	// the average length of Sorani words  is 5.6; for Kurmanji it is 4.8.
 
-	private static int[] alphaValues = {2};
+	private static int[] alphaValues = {2,4,6};
 	private static int alpha; // the minimum occurrence of a pair of suffixes to consider them  'frequent'; 
 	// in the paper it proposes to use  4.
 
-	private static float[] gammaValues = {0.9F};
+	private static float[] gammaValues = {0.7F,0.8F,0.9F};
 	private static float gamma;  // this is the minimum value of a cluster's cohesion (which measure how well-connected the cluster is);
 	// in the paper it is said that it should be between 0.5 and 1.0;
 	// the proposed value is 0.8.
 
-	private static String lexiconFilePath = "lexicons/sorani-atenth-shahin.txt"; //this is the address to the lexicon (a.k.a 'terms vector');
+	private static String lexiconFilePath = "lexicons/sorani-full-shahin.txt"; //this is the address to the lexicon (a.k.a 'terms vector');
 																		//IMPORTANT: the lexicon must be alphabetically sorted first!
 	
 	private static String outputFilePath;// the output file which will contain the stems and their corresponding cluster
